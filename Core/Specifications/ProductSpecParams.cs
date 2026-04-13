@@ -12,7 +12,6 @@ public class ProductSpecParams
     }
   public string? Sort { get; set; }
   private List<string> _brands = [];
-  private List<string> _types = [];
   public List<string> Brands
   {
     get => _brands;
@@ -22,7 +21,7 @@ public class ProductSpecParams
              StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
   }
-
+  private List<string> _types = [];
   public List<string> Types
   {
     get => _types;
@@ -31,6 +30,13 @@ public class ProductSpecParams
             _types = value.SelectMany(x => x.Split(',',
              StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
+  }
+
+  private string? _search;
+  public string Search
+  {
+    get => _search ?? "";
+    set => _search = value.ToLower();
   }
   
 }
