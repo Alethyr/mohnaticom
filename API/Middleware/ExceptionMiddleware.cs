@@ -6,7 +6,7 @@ namespace API.Middleware;
 
 public class ExceptionMiddleware(IHostEnvironment env, RequestDelegate next)
 {
-  public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context)
     {
         try
         {
@@ -26,8 +26,8 @@ public class ExceptionMiddleware(IHostEnvironment env, RequestDelegate next)
         var response = env.IsDevelopment()
         ? new ApiErrorResponse(context.Response.StatusCode, ex.Message, ex.StackTrace)
         : new ApiErrorResponse(context.Response.StatusCode, ex.Message, "Internal Server Error");
-        
-        var options = new JsonSerializerOptions{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
+
+        var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
         var json = JsonSerializer.Serialize(response, options);
 
         return context.Response.WriteAsync(json);

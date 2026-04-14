@@ -3,7 +3,7 @@ namespace Core.Specifications;
 
 public class BrandListSpec : BaseSpecification<Product, string>
 {
-   public BrandListSpec()
+    public BrandListSpec()
     {
         AddSelect(x => x.Brand);
         ApplyDistinct();

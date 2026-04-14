@@ -40,7 +40,7 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
 
     public async Task<IReadOnlyList<T>> ListAllAsync()
     {
-       return await context.Set<T>().ToListAsync();
+        return await context.Set<T>().ToListAsync();
     }
 
     public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
@@ -50,7 +50,7 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
 
     public async Task<IReadOnlyList<TResult>> ListAsync<TResult>(ISpecification<T, TResult> spec)
     {
-       return await ApplySpecification(spec).ToListAsync();
+        return await ApplySpecification(spec).ToListAsync();
     }
 
     public void Remove(T entity)
@@ -76,6 +76,6 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
 
     private IQueryable<TResult> ApplySpecification<TResult>(ISpecification<T, TResult> spec)
     {
-        return SpecificationEvaluator<T>.GetQuery<T,TResult>(context.Set<T>().AsQueryable(), spec);
+        return SpecificationEvaluator<T>.GetQuery<T, TResult>(context.Set<T>().AsQueryable(), spec);
     }
 }

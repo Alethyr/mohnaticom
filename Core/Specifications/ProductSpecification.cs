@@ -13,14 +13,14 @@ public class ProductSpecification : BaseSpecification<Product>
         switch (specParams.Sort)
         {
             case "priceAsc":
-            AddOrderBy(x => x.Price);
-            break;
+                AddOrderBy(x => x.Price);
+                break;
             case "priceDesc":
-            AddOrderByDesc(x => x.Price);
-            break;
+                AddOrderByDesc(x => x.Price);
+                break;
             default:
-            AddOrderBy(x => x.Name);
-            break;
+                AddOrderBy(x => x.Name);
+                break;
         }
     }
 }

@@ -3,7 +3,7 @@ namespace Core.Specifications;
 
 public class TypeListSpec : BaseSpecification<Product, string>
 {
-   public TypeListSpec()
+    public TypeListSpec()
     {
         AddSelect(x => x.Type);
         ApplyDistinct();
