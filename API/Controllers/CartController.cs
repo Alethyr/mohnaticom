@@ -11,7 +11,7 @@ public class CartController(ICartService cartService) : BaseApiController
     {
         ShoppingCart? cart = await cartService.GetCartAsync(id);
         return Ok(cart ?? new ShoppingCart { Id = id });
-    } 
+    }
 
     [HttpPost]
     public async Task<ActionResult<ShoppingCart>> UpdateCart(ShoppingCart cart)
