@@ -47,12 +47,13 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
     public async Task<ActionResult> GetUserInfo()
     {
         if (User.Identity?.IsAuthenticated is false) return NoContent();
-        var user = await signInManager.UserManager.GetUserByEmail(User);
+        var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
         return Ok(new
         {
             user.FirstName,
             user.LastName,
-            user.Email
+            user.Email,
+            Address = user.Address?.ToDTO()
         });
 
     }
@@ -64,5 +65,24 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
         {
             IsAuthenticated = User.Identity?.IsAuthenticated ?? false,  
         });
+    }
+
+    [Authorize]
+    [HttpPost("address")]
+    public async Task<ActionResult<Address>> CreateOrUpdateAddress(AddressDTO addressDTO)
+    {
+        var user = await signInManager.UserManager.GetUserByEmailWithAddress(User);
+        if(user.Address is null)
+        {
+            user.Address = addressDTO.ToEntity();
+        }
+        else
+        {
+            user.Address.UpdateFromDTO(addressDTO);
+        }
+
+        var result = await signInManager.UserManager.UpdateAsync(user);
+
+        return !result.Succeeded ? BadRequest("Problem updating user address") : Ok(user.Address.ToDTO()); 
     }
 }

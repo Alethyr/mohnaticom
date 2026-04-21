@@ -30,7 +30,8 @@ builder.Services.AddCors(options =>
     {
         configurePolicy.WithOrigins("http://localhost:4200", "https://localhost:4200")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
