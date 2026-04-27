@@ -47,6 +47,7 @@ public class OrdersController(ICartService cartService, IUnitOfWork unit) : Base
 
         var order = new Order
         {
+          Discount = OrderDTO.Discount,
           OrderItems = items,
           DeliveryMethod = deliveryMethod,
           ShippingAddress = OrderDTO.ShippingAddress,

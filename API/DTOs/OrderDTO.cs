@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Core.Entities;
 using Core.Entities.OrderAggregate;
 
 namespace API.DTOs;
@@ -24,6 +25,5 @@ public class OrderDTO
   public decimal Total { get; set; }
   [Required]
   public  string PaymentIntentId { get; set; } = null!;
-
-
+  public decimal Discount {get;set;}
 }
