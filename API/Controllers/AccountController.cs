@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using API.DTOs;
 using API.Extensions;
 using Core.Entities;
@@ -53,7 +54,8 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
             user.FirstName,
             user.LastName,
             user.Email,
-            Address = user.Address?.ToDTO()
+            Address = user.Address?.ToDTO(),
+            Roles = User.FindFirstValue(ClaimTypes.Role)
         });
 
     }
