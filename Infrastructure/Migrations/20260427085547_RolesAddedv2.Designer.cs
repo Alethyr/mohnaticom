@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20260427085547_RolesAddedv2")]
+    partial class RolesAddedv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,14 +297,14 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = "admin-id",
-                            ConcurrencyStamp = "admin-concurrency-stamp",
+                            ConcurrencyStamp = "3cffd7d4-b57d-4875-b3db-97befa48aae4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "customer-id",
-                            ConcurrencyStamp = "customer-concurrency-stamp",
+                            ConcurrencyStamp = "91b71114-36e5-4b3b-a6b4-fd2b1eaf9aed",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
