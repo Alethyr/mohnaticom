@@ -5,7 +5,6 @@ using Infrastructure.Data;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
-using Microsoft.OpenApi;
 using API.SignalR;
 using Stripe;
 using Microsoft.AspNetCore.Identity;
@@ -17,13 +16,6 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    opt.EnableSensitiveDataLogging();
-    opt.EnableDetailedErrors();
-
-    opt.LogTo(
-    message => Console.WriteLine(message),
-    new[] { DbLoggerCategory.Database.Command.Name },
-    LogLevel.Information);
 });
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -43,6 +35,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
     var configuration = ConfigurationOptions.Parse(connString, true);
     return ConnectionMultiplexer.Connect(configuration);
 });
+builder.Services.AddSingleton<IResponseCacheService, ResponseCacheService>();
 builder.Services.AddSingleton<ICartService, CartService>();
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
