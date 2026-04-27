@@ -1,5 +1,8 @@
+using System.Security.Cryptography.X509Certificates;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Core.Intrefaces;
+using Core.Specifications;
 using Stripe;
 
 namespace Infrastructure.Services;
@@ -106,5 +109,18 @@ public class PaymentService(StripeClient client, ICartService cartService,
             return (long)deliveryMethod.Price * 100;
         }
         else return 0;
+    }
+
+    public async Task<string> RefundPayment(string paymentIntentId)
+    {
+        var refundOptions = new RefundCreateOptions
+        {
+            PaymentIntent = paymentIntentId
+        };
+        
+
+        var refundService = _client.V1.Refunds;
+        var result = await refundService.CreateAsync(refundOptions);
+        return result.Status; 
     }
 }
