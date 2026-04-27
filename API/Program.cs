@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 using Microsoft.OpenApi;
 using API.SignalR;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,9 +46,13 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
 builder.Services.AddSingleton<ICartService, CartService>();
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
-builder.Services.AddScoped<IPaymentService,PaymentService>();
-builder.Services.AddSignalR();
 
+builder.Services.AddSingleton<StripeClient>(sp =>
+    new StripeClient(builder.Configuration["StripeSettings:SecretKey"]));
+builder.Services.AddScoped<ICouponService, Infrastructure.Services.CouponService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
