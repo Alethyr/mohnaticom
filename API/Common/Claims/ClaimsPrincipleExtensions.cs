@@ -4,7 +4,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Extensions;
+namespace API.Common.Claims;
 
 public static class ClaimsPrincipleExtensions
 {

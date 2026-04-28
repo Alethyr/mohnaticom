@@ -1,7 +1,7 @@
 using API.DTOs;
 using Core.Entities.OrderAggregate;
 
-namespace API.Extensions;
+namespace API.Common.Mapping;
 
 public static class OrderMappingExtension
 {

@@ -1,6 +1,7 @@
 using System.Security.Claims;
+using API.Common.Claims;
+using API.Common.Mapping;
 using API.DTOs;
-using API.Extensions;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity; 
