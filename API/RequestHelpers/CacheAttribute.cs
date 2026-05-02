@@ -1,6 +1,5 @@
 using System.Text;
 using Core.Intrefaces;
-using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

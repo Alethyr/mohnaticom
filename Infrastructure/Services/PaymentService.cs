@@ -1,8 +1,5 @@
-using System.Security.Cryptography.X509Certificates;
 using Core.Entities;
-using Core.Entities.OrderAggregate;
 using Core.Intrefaces;
-using Core.Specifications;
 using Stripe;
 
 namespace Infrastructure.Services;
