@@ -1,4 +1,5 @@
 using API.RequestHelpers;
+using API.RequestHelpers.Filters;
 using Core.Entities;
 using Core.Intrefaces;
 using Core.Specifications;
@@ -14,7 +15,7 @@ public class ProductsController(IUnitOfWork unit) : BaseApiController
     /// </summary>
     /// <response code="200">Список брендов. Возвращает пустой массив если брендов нет.</response>
     [HttpGet("brands")]
-    [Cache(10000)]
+    [Cached(10000)]
     [ProducesResponseType(typeof(IReadOnlyList<string>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
     { 
@@ -27,7 +28,7 @@ public class ProductsController(IUnitOfWork unit) : BaseApiController
     /// </summary>
     /// <response code="200">Список типов. Возвращает пустой массив если типов нет.</response>
     [HttpGet("types")]
-    [Cache(10000)]
+    [Cached(10000)]
     [ProducesResponseType(typeof(IReadOnlyList<string>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
     {
@@ -50,7 +51,7 @@ public class ProductsController(IUnitOfWork unit) : BaseApiController
     /// </remarks>
     /// <response code="200">Постраничный список продуктов. Возвращает пустой массив если продуктов нет.</response>
     [HttpGet]
-    [Cache(600)]
+    [Cached(600)]
     [ProducesResponseType(typeof(Pagination<Product>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts([FromQuery]ProductSpecParams productParams)
     {
@@ -66,7 +67,7 @@ public class ProductsController(IUnitOfWork unit) : BaseApiController
     /// <response code="404">Продукт с указанным id не найден.</response>
     /// <param name="id">Идентификатор товара</param>
     [HttpGet("{id:int}")]
-    [Cache(300)]
+    [Cached(300)]
     [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Product>> GetProduct(int id)

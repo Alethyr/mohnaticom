@@ -21,7 +21,6 @@
     <Folder Include="Errors\" />
     <Folder Include="Middleware\" />
     <Folder Include="OpenApi\" />
-    <Folder Include="RequestHelpers\" />
     <Folder Include="SignalR\" />
   </ItemGroup>
 
